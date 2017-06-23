@@ -17,7 +17,7 @@
 		08E5D2101EAEF8E600374055 /* ToolbarItemHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5D20E1EAEF8E600374055 /* ToolbarItemHandler.swift */; };
 		08F01EA31EFD65070047F397 /* ExpiringCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F01EA21EFD65070047F397 /* ExpiringCache.swift */; };
 		08F01EA51EFD71060047F397 /* ExpiringCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F01EA41EFD71060047F397 /* ExpiringCacheTests.swift */; };
-		08F01EA71EFD81280047F397 /* KeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F01EA61EFD81280047F397 /* KeychainTests.swift */; };
+		08F01EA91EFD86A50047F397 /* KeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F01EA81EFD86A50047F397 /* KeychainTests.swift */; };
 		OBJ_21 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Keychain.swift */; };
 		OBJ_28 /* MJLCommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* MJLCommonTests.swift */; };
 		OBJ_30 /* MJLCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* MJLCommon.framework */; };
@@ -44,7 +44,7 @@
 		08E5D20E1EAEF8E600374055 /* ToolbarItemHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarItemHandler.swift; sourceTree = "<group>"; };
 		08F01EA21EFD65070047F397 /* ExpiringCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpiringCache.swift; sourceTree = "<group>"; };
 		08F01EA41EFD71060047F397 /* ExpiringCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpiringCacheTests.swift; sourceTree = "<group>"; };
-		08F01EA61EFD81280047F397 /* KeychainTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainTests.swift; path = "../../../rc2/s4-client/MacClientTests/KeychainTests.swift"; sourceTree = "<group>"; };
+		08F01EA81EFD86A50047F397 /* KeychainTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainTests.swift; path = "../../../rc2/s4-client/vendor/MJLCommon/Tests/KeychainTests.swift"; sourceTree = "<group>"; };
 		OBJ_12 /* MJLCommonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJLCommonTests.swift; sourceTree = "<group>"; };
 		OBJ_14 /* MJLCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MJLCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_15 /* MJLCommonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = MJLCommonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,8 +94,8 @@
 		OBJ_11 /* MJLCommonTests */ = {
 			isa = PBXGroup;
 			children = (
+				08F01EA81EFD86A50047F397 /* KeychainTests.swift */,
 				OBJ_12 /* MJLCommonTests.swift */,
-				08F01EA61EFD81280047F397 /* KeychainTests.swift */,
 				08F01EA41EFD71060047F397 /* ExpiringCacheTests.swift */,
 			);
 			name = MJLCommonTests;
@@ -237,7 +237,7 @@
 			files = (
 				08F01EA51EFD71060047F397 /* ExpiringCacheTests.swift in Sources */,
 				OBJ_28 /* MJLCommonTests.swift in Sources */,
-				08F01EA71EFD81280047F397 /* KeychainTests.swift in Sources */,
+				08F01EA91EFD86A50047F397 /* KeychainTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
