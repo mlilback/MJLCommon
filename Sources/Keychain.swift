@@ -16,7 +16,7 @@ private let SecValueData: String! = kSecValueData as String
 open class Keychain {
 	let service: String
 
-	init(service: String = "io.rc2.client") {
+	public init(service: String = "io.rc2.client") {
 		self.service = service
 	}
 
