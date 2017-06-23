@@ -7,9 +7,10 @@
 // This file should only be included in macOS targets
 #if os(macOS)
 import Cocoa
+import ClientCore
 #endif
 
-@available(macOS, introduced: 10.12)
+@available(macOS 10.12, *)
 protocol ToolbarItemHandler : class {
 	///called by a top level controller for each toolbar item no one has claimed
 	func handlesToolbarItem(_ item: NSToolbarItem) -> Bool
@@ -17,7 +18,7 @@ protocol ToolbarItemHandler : class {
 	func hookupToToolbarItems(_ handler: ToolbarItemHandler, window: NSWindow)
 }
 
-@available(macOS, introduced: 10.12)
+@available(macOS 10.12, *)
 protocol ToolbarDelegatingOwner : class {
 	//should be called when views have loaded
 	func assignHandlers(_ rootController: NSViewController, items: [NSToolbarItem])
@@ -25,7 +26,7 @@ protocol ToolbarDelegatingOwner : class {
 	func assignUnclaimedToolbarItems(_ toolbar: NSToolbar, handler: ToolbarItemHandler)
 }
 
-@available(macOS, introduced: 10.12)
+@available(macOS 10.12, *)
 extension ToolbarItemHandler {
 	func hookupToToolbarItems(_ handler: ToolbarItemHandler, window: NSWindow) {
 		//find owner
@@ -35,7 +36,7 @@ extension ToolbarItemHandler {
 	}
 }
 
-@available(macOS, introduced: 10.12)
+@available(macOS 10.12, *)
 extension ToolbarDelegatingOwner {
 	func assignUnclaimedToolbarItems(_ toolbar: NSToolbar, handler: ToolbarItemHandler) {
 		for item in toolbar.items where item.action == nil {
@@ -56,7 +57,7 @@ extension ToolbarDelegatingOwner {
 }
 
 //this subclass allows a closure to be injected for validation
-@available(macOS, introduced: 10.12)
+@available(macOS 10.12, *)
 class ValidatingToolbarItem: NSToolbarItem {
 	typealias ToolbarValidationHandler = (ValidatingToolbarItem) -> Void
 	var validationHandler: ToolbarValidationHandler?
@@ -66,13 +67,13 @@ class ValidatingToolbarItem: NSToolbarItem {
 	}
 }
 
-@available(macOS, introduced: 10.12)
-fileprivate func firstChildViewController<T>(_ rootController: NSViewController) -> T?
-{
-	return firstRecursiveDescendent(rootController,
-									children: { return $0.childViewControllers },
-									filter: { return $0 is T }) as? T
-}
+//@available(macOS 10.12, *)
+//fileprivate func firstChildViewController<T>(_ rootController: NSViewController) -> T?
+//{
+//	return firstRecursiveDescendent(rootController,
+//									children: { return $0.childViewControllers },
+//									filter: { return $0 is T }) as? T
+//}
 
 /// Use the following code in a NSWindowController subclass that is the toolbar's delegate
 
