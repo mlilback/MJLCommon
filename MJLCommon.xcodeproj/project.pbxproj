@@ -15,6 +15,8 @@
 		0899DCD51E04717600EA52A0 /* RecursiveFlatMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899DCCF1E04717600EA52A0 /* RecursiveFlatMap.swift */; };
 		08E5D20F1EAEF8E600374055 /* ShellCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5D20D1EAEF8E600374055 /* ShellCommands.swift */; };
 		08E5D2101EAEF8E600374055 /* ToolbarItemHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5D20E1EAEF8E600374055 /* ToolbarItemHandler.swift */; };
+		08F01EA31EFD65070047F397 /* ExpiringCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F01EA21EFD65070047F397 /* ExpiringCache.swift */; };
+		08F01EA51EFD71060047F397 /* ExpiringCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F01EA41EFD71060047F397 /* ExpiringCacheTests.swift */; };
 		OBJ_21 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Keychain.swift */; };
 		OBJ_28 /* MJLCommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* MJLCommonTests.swift */; };
 		OBJ_30 /* MJLCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* MJLCommon.framework */; };
@@ -39,6 +41,8 @@
 		0899DCCF1E04717600EA52A0 /* RecursiveFlatMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecursiveFlatMap.swift; sourceTree = "<group>"; };
 		08E5D20D1EAEF8E600374055 /* ShellCommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShellCommands.swift; sourceTree = "<group>"; };
 		08E5D20E1EAEF8E600374055 /* ToolbarItemHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarItemHandler.swift; sourceTree = "<group>"; };
+		08F01EA21EFD65070047F397 /* ExpiringCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpiringCache.swift; sourceTree = "<group>"; };
+		08F01EA41EFD71060047F397 /* ExpiringCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpiringCacheTests.swift; sourceTree = "<group>"; };
 		OBJ_12 /* MJLCommonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJLCommonTests.swift; sourceTree = "<group>"; };
 		OBJ_14 /* MJLCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MJLCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_15 /* MJLCommonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = MJLCommonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_12 /* MJLCommonTests.swift */,
+				08F01EA41EFD71060047F397 /* ExpiringCacheTests.swift */,
 			);
 			name = MJLCommonTests;
 			path = Tests/MJLCommonTests;
@@ -129,6 +134,7 @@
 				08E5D20D1EAEF8E600374055 /* ShellCommands.swift */,
 				08E5D20E1EAEF8E600374055 /* ToolbarItemHandler.swift */,
 				0899DCC91E04717600EA52A0 /* extensions */,
+				08F01EA21EFD65070047F397 /* ExpiringCache.swift */,
 			);
 			name = MJLCommon;
 			path = Sources;
@@ -211,6 +217,7 @@
 			files = (
 				08E5D20F1EAEF8E600374055 /* ShellCommands.swift in Sources */,
 				0899DCD21E04717600EA52A0 /* NSURL+MJL.swift in Sources */,
+				08F01EA31EFD65070047F397 /* ExpiringCache.swift in Sources */,
 				08E5D2101EAEF8E600374055 /* ToolbarItemHandler.swift in Sources */,
 				OBJ_21 /* Keychain.swift in Sources */,
 				0899DCD41E04717600EA52A0 /* String+MJL.swift in Sources */,
@@ -225,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				08F01EA51EFD71060047F397 /* ExpiringCacheTests.swift in Sources */,
 				OBJ_28 /* MJLCommonTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
