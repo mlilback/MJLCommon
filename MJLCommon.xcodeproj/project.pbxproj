@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0899DCD01E04717600EA52A0 /* Data+MJL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899DCCA1E04717600EA52A0 /* Data+MJL.swift */; };
 		0899DCD11E04717600EA52A0 /* FileManager+MJL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899DCCB1E04717600EA52A0 /* FileManager+MJL.swift */; };
-		0899DCD21E04717600EA52A0 /* NSURL+MJL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899DCCC1E04717600EA52A0 /* NSURL+MJL.swift */; };
+		0899DCD21E04717600EA52A0 /* URL+MJL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899DCCC1E04717600EA52A0 /* URL+MJL.swift */; };
 		0899DCD31E04717600EA52A0 /* Process+MJL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899DCCD1E04717600EA52A0 /* Process+MJL.swift */; };
 		0899DCD41E04717600EA52A0 /* String+MJL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899DCCE1E04717600EA52A0 /* String+MJL.swift */; };
 		0899DCD51E04717600EA52A0 /* RecursiveFlatMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899DCCF1E04717600EA52A0 /* RecursiveFlatMap.swift */; };
@@ -36,7 +36,7 @@
 /* Begin PBXFileReference section */
 		0899DCCA1E04717600EA52A0 /* Data+MJL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+MJL.swift"; sourceTree = "<group>"; };
 		0899DCCB1E04717600EA52A0 /* FileManager+MJL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+MJL.swift"; sourceTree = "<group>"; };
-		0899DCCC1E04717600EA52A0 /* NSURL+MJL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+MJL.swift"; sourceTree = "<group>"; };
+		0899DCCC1E04717600EA52A0 /* URL+MJL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+MJL.swift"; sourceTree = "<group>"; };
 		0899DCCD1E04717600EA52A0 /* Process+MJL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Process+MJL.swift"; sourceTree = "<group>"; };
 		0899DCCE1E04717600EA52A0 /* String+MJL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+MJL.swift"; sourceTree = "<group>"; };
 		0899DCCF1E04717600EA52A0 /* RecursiveFlatMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecursiveFlatMap.swift; sourceTree = "<group>"; };
@@ -76,7 +76,7 @@
 			children = (
 				0899DCCA1E04717600EA52A0 /* Data+MJL.swift */,
 				0899DCCB1E04717600EA52A0 /* FileManager+MJL.swift */,
-				0899DCCC1E04717600EA52A0 /* NSURL+MJL.swift */,
+				0899DCCC1E04717600EA52A0 /* URL+MJL.swift */,
 				0899DCCD1E04717600EA52A0 /* Process+MJL.swift */,
 				0899DCCE1E04717600EA52A0 /* String+MJL.swift */,
 			);
@@ -219,7 +219,7 @@
 			buildActionMask = 0;
 			files = (
 				08E5D20F1EAEF8E600374055 /* ShellCommands.swift in Sources */,
-				0899DCD21E04717600EA52A0 /* NSURL+MJL.swift in Sources */,
+				0899DCD21E04717600EA52A0 /* URL+MJL.swift in Sources */,
 				08F01EA31EFD65070047F397 /* ExpiringCache.swift in Sources */,
 				08E5D2101EAEF8E600374055 /* ToolbarItemHandler.swift in Sources */,
 				OBJ_21 /* Keychain.swift in Sources */,
