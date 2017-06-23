@@ -41,7 +41,7 @@
 		08E5D20E1EAEF8E600374055 /* ToolbarItemHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarItemHandler.swift; sourceTree = "<group>"; };
 		OBJ_12 /* MJLCommonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJLCommonTests.swift; sourceTree = "<group>"; };
 		OBJ_14 /* MJLCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MJLCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		OBJ_15 /* MJLCommonTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = MJLCommonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_15 /* MJLCommonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = MJLCommonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		OBJ_9 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,6 +177,14 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 9999;
+				TargetAttributes = {
+					OBJ_16 = {
+						LastSwiftMigration = 0900;
+					};
+					OBJ_23 = {
+						LastSwiftMigration = 0900;
+					};
+				};
 			};
 			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "MJLCommon" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -248,6 +256,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = MJLCommon;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SWIFT_VERSION = 4.0;
 				TARGET_NAME = MJLCommon;
 			};
 			name = Debug;
@@ -268,6 +277,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = MJLCommon;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SWIFT_VERSION = 4.0;
 				TARGET_NAME = MJLCommon;
 			};
 			name = Release;
@@ -285,6 +295,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_VERSION = 4.0;
 				TARGET_NAME = MJLCommonTests;
 			};
 			name = Debug;
@@ -302,6 +313,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_VERSION = 4.0;
 				TARGET_NAME = MJLCommonTests;
 			};
 			name = Release;

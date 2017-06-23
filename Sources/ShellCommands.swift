@@ -34,7 +34,7 @@ open class ShellCommands {
 			{
 				var results = [String]()
 				for i in 0..<matchResult.numberOfRanges {
-					results.append(fullString.substring(with: matchResult.rangeAt(i)))
+					results.append(fullString.substring(with: matchResult.range(at: i)))
 				}
 				return results
 			}
