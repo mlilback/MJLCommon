@@ -12,11 +12,9 @@ extension URL {
 	/// - Returns: the localized name
 	public func localizedName() -> String {
 		var appName: String = (self.deletingPathExtension().lastPathComponent)
-		var appNameObj: AnyObject?
 		do {
-			let bridged = self as NSURL
-			try bridged.getResourceValue(&appNameObj, forKey: URLResourceKey.localizedNameKey)
-			if let localName = appNameObj as? String {
+			let rsrcs = try resourceValues(forKeys: [.localizedNameKey])
+			if let localName = rsrcs.localizedName {
 				appName = localName
 			}
 			//remove any extension
@@ -43,9 +41,7 @@ extension URL {
 	/// - Returns: true if this URL represents a directory on the local file system
 	public func directoryExists() -> Bool {
 		guard isFileURL else { return false }
-		if let values = try? resourceValues(forKeys: [.isDirectoryKey]) {
-			return values.isDirectory!
-		}
+		if let rsrcs = try? resourceValues(forKeys: [.isDirectoryKey]), let isDir = rsrcs.isDirectory { return isDir }
 		return false
 	}
 
@@ -62,11 +58,9 @@ extension URL {
 	public func fileSize() -> Int64 {
 		guard self.isFileURL else { return 0 }
 		do {
-			var rsrc: AnyObject?
-			let bridged = self as NSURL
-			try bridged.getResourceValue(&rsrc, forKey: URLResourceKey.fileSizeKey)
-			if let size = rsrc as? NSNumber {
-				return Int64(size.int64Value)
+			let rsrcs = try resourceValues(forKeys: [.fileSizeKey])
+			if let size = rsrcs.fileSize {
+				return Int64(size)
 			}
 		} catch _ {}
 		return 0
