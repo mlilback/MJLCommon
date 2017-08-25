@@ -45,7 +45,7 @@ public extension String {
 	/// - returns: the substring, or nil if the range is invalid
 	func substring(from: NSRange) -> String? {
 		guard let range = range(from: from) else { return nil }
-		return substring(with: range)
+		return String(self[range])
 	}
 
 	/// Returns self with string removed from the end (if present)
@@ -54,7 +54,8 @@ public extension String {
 	/// - Returns: self with string removed from the end
 	public func truncate(string: String) -> String {
 		guard hasSuffix(string) else { return self }
-		return substring(to: index(endIndex, offsetBy: -string.characters.count))
+		let idx = index(endIndex, offsetBy: -string.characters.count)
+		return String(self[..<idx])
 	}
 
 	/// Returns self with a specified number of characters removed from the end
@@ -62,7 +63,8 @@ public extension String {
 	/// - Parameter by: the number of characters to remove from the end
 	/// - Returns: self with by characters removed from the end
 	public func truncate(by: Int) -> String {
-		guard characters.count > by else { return self }
-		return substring(to: index(endIndex, offsetBy: -by))
+		guard count > by else { return self }
+		let idx = index(endIndex, offsetBy: -by)
+		return String(self[..<idx])
 	}
 }

@@ -19,7 +19,7 @@ extension URL {
 			}
 			//remove any extension
 			if let dotIndex = appName.characters.index(of: ".") {
-				appName = appName.substring(to: dotIndex)
+				appName = String(appName[..<dotIndex])
 			}
 			return appName
 		} catch _ {} //don't care if it failed
