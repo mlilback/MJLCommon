@@ -54,7 +54,7 @@ public extension String {
 	/// - Returns: self with string removed from the end
 	public func truncate(string: String) -> String {
 		guard hasSuffix(string) else { return self }
-		let idx = index(endIndex, offsetBy: -string.characters.count)
+		let idx = index(endIndex, offsetBy: -string.count)
 		return String(self[..<idx])
 	}
 

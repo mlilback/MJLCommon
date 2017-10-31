@@ -14,7 +14,7 @@ public extension ProcessInfo {
 	///   - defaultValue: the value to return instead of nil or if the length is 0
 	/// - Returns: the environment variable, or the defaultValue
 	public func envValue(name: String, defaultValue: String) -> String {
-		guard let envVal = ProcessInfo.processInfo.environment[name], !envVal.characters.isEmpty else {
+		guard let envVal = ProcessInfo.processInfo.environment[name], !envVal.isEmpty else {
 			return defaultValue
 		}
 		return envVal
