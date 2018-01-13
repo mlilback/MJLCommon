@@ -7,7 +7,7 @@
 // This file should only be included in macOS targets
 #if os(macOS)
 import Cocoa
-import ClientCore
+//import ClientCore
 #endif
 
 @available(macOS 10.12, *)
@@ -30,7 +30,7 @@ protocol ToolbarDelegatingOwner : class {
 extension ToolbarItemHandler {
 	func hookupToToolbarItems(_ handler: ToolbarItemHandler, window: NSWindow) {
 		//find owner
-		if let owner: ToolbarDelegatingOwner = firstChildViewController(window.contentViewController!) {
+		if let owner: ToolbarDelegatingOwner = _firstChildViewController(window.contentViewController!) {
 			owner.assignUnclaimedToolbarItems(window.toolbar!, handler: handler)
 		}
 	}
@@ -67,13 +67,13 @@ class ValidatingToolbarItem: NSToolbarItem {
 	}
 }
 
-//@available(macOS 10.12, *)
-//fileprivate func firstChildViewController<T>(_ rootController: NSViewController) -> T?
-//{
-//	return firstRecursiveDescendent(rootController,
-//									children: { return $0.childViewControllers },
-//									filter: { return $0 is T }) as? T
-//}
+@available(macOS 10.12, *)
+fileprivate func _firstChildViewController<T>(_ rootController: NSViewController) -> T?
+{
+	return firstRecursiveDescendent(rootController,
+									children: { return $0.childViewControllers },
+									filter: { return $0 is T }) as? T
+}
 
 /// Use the following code in a NSWindowController subclass that is the toolbar's delegate
 
