@@ -18,4 +18,17 @@ class PlatformColorTests: XCTestCase {
 		let color2 = PlatformColor(hexString: hexstr)
 		XCTAssertEqual(color, color2)
 	}
+	
+	func testCreateViaHex() {
+		let color = NSColor(red: 0, green: 0.5, blue: 0.5, alpha: 0.5)
+		let hcolor = PlatformColor(rgbaHexString: "007f7f99")
+		XCTAssertEqual(color, hcolor)
+	}
+	
+	func testHexString() {
+		let color = NSColor(red: 0.5, green: 0.5, blue: 0, alpha: 1.0)
+		XCTAssertEqual(color.hexString, "7F7F00")
+		let color2 = NSColor(red: 0.5, green: 0.5, blue: 0, alpha: 0.6)
+		XCTAssertEqual(color2.hexString, "7F7F0099")
+	}
 }

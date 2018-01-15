@@ -51,6 +51,11 @@ public extension PlatformColor {
 		let red = UInt8(redComponent * 255.0)
 		let green = UInt8(greenComponent * 255.0)
 		let blue = UInt8(blueComponent * 255.0)
-		return String(format: "%0.2x%0.2x%0.2x", red, green, blue)
+		var baseStr = String(format: "%0.2X%0.2X%0.2X", red, green, blue)
+		let alpha = UInt8(alphaComponent * 255.0)
+		if alpha < 255 {
+			baseStr += String(format: "%0.2X", alpha)
+		}
+		return baseStr
 	}
 }
