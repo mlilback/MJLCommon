@@ -20,32 +20,44 @@ extension CharacterSet {
 }
 
 public extension PlatformColor {
-	/// initialize a color from a hex string
-	///
-	/// - Parameters:
-	///   - hexString: A six character hex string in RRGGBB format, with an optional # at the start
-	///   - alpha: the alpha value to use, 0…1.0, defaults to 1.0
-	public convenience init?(hexString: String, alpha: CGFloat = 1.0) {
+	// scans a two character two characters from a string into hex, then returns value converted to a CGFloat
+	private static func scanFloatFromHex(string: String, startOffset: Int) -> CGFloat {
+		guard string.count >= startOffset + 1 else { fatalError("invalid string offset") }
+		let endOffset = startOffset + 2
+		let range = string.index(string.startIndex, offsetBy: startOffset) ..< string.index(string.startIndex, offsetBy: endOffset)
+		var hexInt: CUnsignedInt = 0
+		Scanner(string: String(string[range])).scanHexInt32(&hexInt)
+		return CGFloat(CGFloat(hexInt) / 255.0)
+	}
+	
+	//parses a hexstring into 4 float values. throws exception if not valid hex string
+	private static func parse(hexString: String) throws -> (CGFloat, CGFloat, CGFloat, CGFloat) {
 		var hcode = hexString
 		if hcode.hasPrefix("#") {
 			hcode = String(hcode[hcode.index(hcode.startIndex, offsetBy: 1)...])
 		}
-		guard hcode.count == 6, hcode.trimmingCharacters(in: CharacterSet.hexadecimal) == "" else { return nil }
-
-		let redHex = String(hexString[..<hexString.index(hexString.startIndex, offsetBy: 2)])
-		let greenHex = String(hexString[hexString.index(hexString.startIndex, offsetBy: 2) ..< hexString.index(hexString.startIndex, offsetBy: 4)])
-		let blueHex = String(hexString[hexString.index(hexString.startIndex, offsetBy: 4) ..< hexString.index(hexString.startIndex, offsetBy: 6)])
-		var redInt: CUnsignedInt = 0
-		var greenInt: CUnsignedInt = 0
-		var blueInt: CUnsignedInt = 0
-		Scanner(string: redHex).scanHexInt32(&redInt)
-		Scanner(string: greenHex).scanHexInt32(&greenInt)
-		Scanner(string: blueHex).scanHexInt32(&blueInt)
-		let divisor: CGFloat = 255.0
-
-		self.init(red: CGFloat(redInt) / divisor, green: CGFloat(greenInt) / divisor, blue: CGFloat(blueInt) / divisor, alpha: alpha)
+		guard hcode.count == 6 || hcode.count == 8,
+			hcode.trimmingCharacters(in: .hexadecimal) == ""
+			else { throw GenericError("invalid hex string") }
+		
+		var alpha: CGFloat = 1.0
+		if hcode.count == 8 { alpha = scanFloatFromHex(string: hexString, startOffset: 6) }
+		return (scanFloatFromHex(string: hexString, startOffset: 0), scanFloatFromHex(string: hexString, startOffset: 2), scanFloatFromHex(string: hexString, startOffset: 4), alpha)
 	}
-
+	
+	/// initialize a color from a hex string
+	///
+	/// - Parameters:
+	///   - hexString: A hex string in RRGGBB or RRGGBBAA format, with an optional # at the start
+	public convenience init?(hexString: String) {
+		do {
+			let vals = try PlatformColor.parse(hexString: hexString)
+			self.init(red: vals.0, green: vals.1, blue: vals.2, alpha: vals.3)
+		} catch {
+			return nil
+		}
+	}
+	
 	/// the color as a hex string, without a leading # character
 	public var hexString: String {
 		let red = UInt8(redComponent * 255.0)
@@ -57,5 +69,28 @@ public extension PlatformColor {
 			baseStr += String(format: "%0.2X", alpha)
 		}
 		return baseStr
+	}
+	
+	/// Compares two colors by RGBA components
+	///
+	/// - Parameter other: another color to compare self to
+	/// - Parameter accuracy: how far off the component values can be (since float equality is not always exact)
+	/// - Returns: true if equal to other color within accuracy
+	public func equals(_ other: PlatformColor, accuracy: CGFloat = 0.01) -> Bool {
+		let rdist = abs(self.redComponent - other.redComponent)._rounded(toPlaces: 4)
+		let gdist = abs(self.greenComponent - other.greenComponent)._rounded(toPlaces: 4)
+		let bdist = abs(self.blueComponent - other.blueComponent)._rounded(toPlaces: 4)
+		let adist = abs(self.alphaComponent - other.alphaComponent)._rounded(toPlaces: 4)
+		return rdist <= accuracy && gdist <= accuracy && bdist <= accuracy && adist <= accuracy
+	}
+}
+
+fileprivate extension BinaryFloatingPoint {
+	/// rounds a float to a specified number of places. Named with underscore to not conflict if swift stdlib adds a similarily named function
+	// see [StackExchange](https://codereview.stackexchange.com/a/142850/158119)
+	func _rounded(toPlaces places: Int) -> Self {
+		guard places >= 0 else { return self }
+		let divisor = Self((0..<places).reduce(1.0) { (accum, _) in 10.0 * accum })
+		return (self * divisor).rounded() / divisor
 	}
 }
