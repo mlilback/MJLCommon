@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import MacClient
+@testable import MJLCommon
 
 class KeychainTests: XCTestCase {
 	let user = "me@rc2"
