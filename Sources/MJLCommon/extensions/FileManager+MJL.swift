@@ -15,4 +15,18 @@ public extension FileManager {
 		var isDir: ObjCBool = false
 		return  self.fileExists(atPath: at.absoluteURL.path, isDirectory: &isDir) && isDir.boolValue
 	}
+	
+	/// creates an empty temporary directory
+	///
+	/// - Returns: URL to a newly created directory
+	/// - Throws: any errors from creating the directory
+	public func createTemporaryDirectory() throws -> URL {
+		let tmpDir = temporaryDirectory.appendingPathComponent(UUID().uuidString)
+		if fileExists(atPath: tmpDir.path) {
+			try removeItem(at: tmpDir)
+		}
+		try createDirectory(at: tmpDir, withIntermediateDirectories: true, attributes: nil)
+		return tmpDir
+	}
 }
+
