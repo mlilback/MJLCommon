@@ -6,7 +6,7 @@
 
 import Foundation
 
-extension Set where Element: AnyObject {
+public extension Set where Element: AnyObject {
 	/// Given:
 	/// * a value type `Value`
 	/// * a wrapper type `Wrapper`
@@ -24,7 +24,7 @@ extension Set where Element: AnyObject {
 	///   - valueKeyPath: The keyPath of the Wrapper to a property of type Value
 	///   - uniqueKeyPath: A unique property of Value to match wrappers to newValues
 	/// - Returns: A tuple of: Values that should be added, wrappers that should be removed, and wrappers that should remain (with updates applied)
-	func update<Value: Equatable, T: Equatable>(
+	public func update<Value: Equatable, T: Equatable>(
 		newValues: [Value],
 		valueKeyPath: ReferenceWritableKeyPath<Element, Value>,
 		uniqueKeyPath: KeyPath<Value, T>
