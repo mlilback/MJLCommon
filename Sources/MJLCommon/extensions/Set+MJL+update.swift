@@ -14,7 +14,7 @@ public extension Set where Element: AnyObject {
 	/// * `Value` has a property of type `T` that uniquely identifies `Value` objects (reached via uniqueKeyPath)
 	///
 	/// Process the wrappers returning a tuple of:
-	/// * a replacement for wrappers with updates applied and wrappers removed that didn't have a matching newValue
+	/// * a replacement for wrappers with updates optionally pplied and wrappers removed that didn't have a matching newValue
 	/// * the subset of newValues that need to have `Wrapper`s created and added to updated
 	/// * the subset of objects removed from wrappers
 	///
@@ -23,11 +23,13 @@ public extension Set where Element: AnyObject {
 	///   - newValues: An array of wrapped objects to update the wrappers set with
 	///   - valueKeyPath: The keyPath of the Wrapper to a property of type Value
 	///   - uniqueKeyPath: A unique property of Value to match wrappers to newValues
+	///   - performUpdate: If true, actually update the wrapper's valueKeyPath with the newValue
 	/// - Returns: A tuple of: Values that should be added, wrappers that should be removed, and wrappers that should remain (with updates applied)
-	public func update<Value: Equatable, T: Equatable>(
+	public func filterForUpdate<Value: Equatable, T: Equatable>(
 		newValues: [Value],
 		valueKeyPath: ReferenceWritableKeyPath<Element, Value>,
-		uniqueKeyPath: KeyPath<Value, T>
+		uniqueKeyPath: KeyPath<Value, T>,
+		performUpdate: Bool
 		) -> (updated: Set<Element>, added: [Value], removed: Set<Element>)
 	{
 		var added = [Value]()
@@ -43,7 +45,9 @@ public extension Set where Element: AnyObject {
 				return v1 == v2
 			})
 			{
-				oldValue[keyPath: valueKeyPath] = aValue
+				if performUpdate {
+					oldValue[keyPath: valueKeyPath] = aValue
+				}
 				keeping.insert(oldValue)
 				remaining.remove(oldValue)
 			} else {
