@@ -28,16 +28,6 @@ public extension String {
 		return from ..< to
 	}
 
-	/// return the base64 encoded version of this string
-	///
-	/// - Returns: base64 encoded version
-	func base64Encoded() -> String? {
-		if let data = self.data(using: .utf8) {
-			return data.base64EncodedString()
-		}
-		return nil
-	}
-
 	/// retrieve the substring represented by an NSRange
 	///
 	/// - parameter from: the desired range
