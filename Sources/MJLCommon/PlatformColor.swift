@@ -8,10 +8,12 @@
 	import AppKit
 	public typealias PlatformColor = NSColor
 	public typealias PlatformImage = NSImage
+	public typealias PlatformFont = NSFont
 #else
 	import UIKit
 	public typealias PlatformColor = UIColor
 	public typealias PlatformImage = UIImage
+	public typealias PlatformFont = UIFont
 #endif
 
 extension CharacterSet {
