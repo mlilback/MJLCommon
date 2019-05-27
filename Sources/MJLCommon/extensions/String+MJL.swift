@@ -8,10 +8,10 @@ import Foundation
 
 public extension String {
 	/// Returns the range that encompases the entire string
-	public var fullRange: Range<Index> { return startIndex..<endIndex }
+	var fullRange: Range<Index> { return startIndex..<endIndex }
 	
 	/// Returns the NSRange that encompases the entire string
-	public var fullNSRange: NSRange { return NSRange(location: 0, length: utf16.count) }
+	var fullNSRange: NSRange { return NSRange(location: 0, length: utf16.count) }
 
 	/// Converts an NSRange to a Range<String.Index>
 	///
@@ -42,7 +42,7 @@ public extension String {
 	///
 	/// - Parameter string: the string to remove from the end
 	/// - Returns: self with string removed from the end
-	public func truncate(string: String) -> String {
+	func truncate(string: String) -> String {
 		guard hasSuffix(string) else { return self }
 		let idx = index(endIndex, offsetBy: -string.count)
 		return String(self[..<idx])
@@ -52,7 +52,7 @@ public extension String {
 	///
 	/// - Parameter by: the number of characters to remove from the end
 	/// - Returns: self with by characters removed from the end
-	public func truncate(by: Int) -> String {
+	func truncate(by: Int) -> String {
 		guard count > by else { return self }
 		let idx = index(endIndex, offsetBy: -by)
 		return String(self[..<idx])

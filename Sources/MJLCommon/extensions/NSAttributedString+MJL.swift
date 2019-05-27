@@ -10,7 +10,7 @@ public extension NSMutableAttributedString {
 	/// Replaces this string with contents
 	///
 	/// - Parameter contents: An attributed string to set this string's content to
-	public func replace(with contents: NSAttributedString) {
+	func replace(with contents: NSAttributedString) {
 		deleteCharacters(in: NSRange(location: 0, length: length))
 		setAttributedString(contents)
 	}
@@ -18,7 +18,7 @@ public extension NSMutableAttributedString {
 	/// Replaces this string with contents
 	///
 	/// - Parameter contents: A string to set this string's content to (discarding all attributes)
-	public func replace(with contents: String) {
+	func replace(with contents: String) {
 		deleteCharacters(in: NSRange(location: 0, length: length))
 		setAttributedString(NSAttributedString(string: contents))
 	}

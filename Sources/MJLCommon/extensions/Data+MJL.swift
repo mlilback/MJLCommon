@@ -11,7 +11,7 @@ public extension Data {
 	///
 	/// - parameter inputStream: The stream to read data from
 	/// - parameter bufferSize: the size of the buffer to use while reading from inputStream. Defaults to 1 MB
-	public init(_ inputStream: InputStream, bufferSize: Int = 10_240) {
+	init(_ inputStream: InputStream, bufferSize: Int = 10_240) {
 		self.init()
 		var buffer = [UInt8](repeating: 0, count: bufferSize)
 		inputStream.open()
@@ -27,7 +27,7 @@ public extension Data {
 	/// - Parameters:
 	///   - divider: the data to use as a seperator
 	///   - handler: a closure that is passed a matching slice of data
-	public func enumerateComponentsSeparated(by divider: Data, handler: (Data) -> Void) {
+	func enumerateComponentsSeparated(by divider: Data, handler: (Data) -> Void) {
 		var start = startIndex
 		var remainingRange: Range<Data.Index> = start..<endIndex
 		while true {

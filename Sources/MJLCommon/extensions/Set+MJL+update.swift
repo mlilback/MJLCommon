@@ -25,7 +25,7 @@ public extension Set where Element: AnyObject {
 	///   - uniqueKeyPath: A unique property of Value to match wrappers to newValues
 	///   - performUpdate: If true, actually update the wrapper's valueKeyPath with the newValue
 	/// - Returns: A tuple of: Values that should be added, wrappers that should be removed, and wrappers that should remain (with updates applied)
-	public func filterForUpdate<Value: Equatable, T: Equatable>(
+	func filterForUpdate<Value: Equatable, T: Equatable>(
 		newValues: [Value],
 		valueKeyPath: ReferenceWritableKeyPath<Element, Value>,
 		uniqueKeyPath: KeyPath<Value, T>,
