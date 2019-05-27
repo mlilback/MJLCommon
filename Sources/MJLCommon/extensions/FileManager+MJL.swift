@@ -11,7 +11,7 @@ public extension FileManager {
 	///
 	/// - Parameter at: the URL to check
 	/// - Returns: true if there is  directory at the specified URL
-	public func directoryExists(at: URL) -> Bool {
+	func directoryExists(at: URL) -> Bool {
 		var isDir: ObjCBool = false
 		return  self.fileExists(atPath: at.absoluteURL.path, isDirectory: &isDir) && isDir.boolValue
 	}
@@ -20,7 +20,7 @@ public extension FileManager {
 	///
 	/// - Returns: URL to a newly created directory
 	/// - Throws: any errors from creating the directory
-	public func createTemporaryDirectory() throws -> URL {
+	func createTemporaryDirectory() throws -> URL {
 		let tmpDir = temporaryDirectory.appendingPathComponent(UUID().uuidString)
 		if fileExists(atPath: tmpDir.path) {
 			try removeItem(at: tmpDir)

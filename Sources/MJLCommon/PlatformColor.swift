@@ -51,7 +51,7 @@ public extension PlatformColor {
 	///
 	/// - Parameters:
 	///   - hexString: A hex string in RRGGBB or RRGGBBAA format, with an optional # at the start
-	public convenience init?(hexString: String) {
+	convenience init?(hexString: String) {
 		do {
 			let vals = try PlatformColor.parse(hexString: hexString)
 			self.init(red: vals.0, green: vals.1, blue: vals.2, alpha: vals.3)
@@ -61,7 +61,7 @@ public extension PlatformColor {
 	}
 	
 	/// the color as a hex string, without a leading # character
-	public var hexString: String {
+	var hexString: String {
 		let red = UInt8(redComponent * 255.0)
 		let green = UInt8(greenComponent * 255.0)
 		let blue = UInt8(blueComponent * 255.0)
@@ -78,7 +78,7 @@ public extension PlatformColor {
 	/// - Parameter other: another color to compare self to
 	/// - Parameter accuracy: how far off the component values can be (since float equality is not always exact)
 	/// - Returns: true if equal to other color within accuracy
-	public func equals(_ other: PlatformColor, accuracy: CGFloat = 0.01) -> Bool {
+	func equals(_ other: PlatformColor, accuracy: CGFloat = 0.01) -> Bool {
 		let rdist = abs(self.redComponent - other.redComponent)._rounded(toPlaces: 4)
 		let gdist = abs(self.greenComponent - other.greenComponent)._rounded(toPlaces: 4)
 		let bdist = abs(self.blueComponent - other.blueComponent)._rounded(toPlaces: 4)
