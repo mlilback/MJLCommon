@@ -18,7 +18,7 @@ extension URL {
 				appName = localName
 			}
 			//remove any extension
-			if let dotIndex = appName.index(of: ".") {
+			if let dotIndex = appName.firstIndex(of: ".") {
 				appName = String(appName[..<dotIndex])
 			}
 			return appName
