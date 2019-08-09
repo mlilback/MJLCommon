@@ -46,7 +46,7 @@ extension ToolbarDelegatingOwner {
 	
 	func assignHandlers(_ rootController: NSViewController, items: [NSToolbarItem]) {
 		//find every ToolbarItemHandler in rootController
-		let handlers = recursiveFlatMap(rootController, children: { $0.childViewControllers }, transform: { $0 as? ToolbarItemHandler })
+		let handlers = recursiveFlatMap(rootController, children: { $0.children }, transform: { $0 as? ToolbarItemHandler })
 		//loop through toolbar items looking for the first handler that handles the item
 		for anItem in items {
 			for aHandler in handlers {
@@ -71,7 +71,7 @@ class ValidatingToolbarItem: NSToolbarItem {
 fileprivate func _firstChildViewController<T>(_ rootController: NSViewController) -> T?
 {
 	return firstRecursiveDescendent(rootController,
-									children: { return $0.childViewControllers },
+									children: { return $0.children },
 									filter: { return $0 is T }) as? T
 }
 
