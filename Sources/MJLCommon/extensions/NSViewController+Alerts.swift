@@ -5,8 +5,9 @@
 //
 
 import Cocoa
-// TODO: use canImport for this when running on swift 4.1
+#if canImport(SwiftyUserDefaults)
 import SwiftyUserDefaults
+#endif
 
 public extension NSViewController {
 	/// Displays an alert sheet to confirm an action. If the defaults value for the suppressionKey is true, the handler is immediately called with true.
@@ -43,7 +44,7 @@ public extension NSViewController {
 			handler(response == .alertFirstButtonReturn)
 		})
 	}
-
+	#if canImport(SwiftyUserDefaults)
 	/// Displays an alert sheet to confirm an action. This versions takes a supression key in the format used by SwiftyUserDefaults. If such a value is not supplied or is a string, another version of this function is called. If the defaults value for the suppressionKey is true, the handler is immediately called with true.
 	///
 	/// - Parameters:
@@ -77,5 +78,6 @@ public extension NSViewController {
 			handler(response == .alertFirstButtonReturn)
 		})
 	}
+	#endif
 }
 
