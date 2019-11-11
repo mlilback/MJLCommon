@@ -16,6 +16,23 @@ public extension FileManager {
 		return  self.fileExists(atPath: at.absoluteURL.path, isDirectory: &isDir) && isDir.boolValue
 	}
 	
+	/// if url does not exist, returns url. Otherwise, iterates adding an incrementing number (starting at 1) until the file does not exist
+	/// - Parameter url: desired URL to save a file to
+	/// - Returns: url, or the first incremented name that does not exist (e.g. "File 1.txt", "File 2.txt")
+	func uniquedName(for url: URL) -> URL {
+		guard url.fileExists() else { return url }
+		let baseUrl = url.deletingLastPathComponent()
+		let ext = url.pathExtension
+		let baseFileName = url.deletingPathExtension().lastPathComponent
+		var num = 1
+		var nextFile = url
+		repeat {
+			nextFile = baseUrl.appendingPathComponent("\(baseFileName) \(num).\(ext)")
+			num += 1
+		} while (nextFile.fileExists())
+		return nextFile
+	}
+	
 	/// creates an empty temporary directory
 	///
 	/// - Returns: URL to a newly created directory
