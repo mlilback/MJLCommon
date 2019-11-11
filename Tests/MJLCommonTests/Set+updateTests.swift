@@ -30,7 +30,9 @@ class PersonWrapper: Hashable, CustomStringConvertible {
 	}
 	
 	var description: String { return "wrapper \(person.name)" }
-	var hashValue: Int { return ObjectIdentifier(self).hashValue }
+	func hash(into: inout Hasher) {
+		into.combine(ObjectIdentifier(self).hashValue)
+	}
 	
 	static func ==(lhs: PersonWrapper, rhs: PersonWrapper) -> Bool {
 		return lhs.person == rhs.person
@@ -49,10 +51,11 @@ class SetUpdateTests: XCTestCase {
 		let wrappedPersons = [p1, p2, p3, p4, updatedP2].map { PersonWrapper($0) }
 		let wrappers = Set<PersonWrapper>(wrappedPersons[0..<3])
 		
-		let (updated, added, removed) = wrappers.update(
+		let (updated, added, removed) = wrappers.filterForUpdate(
 			newValues: revised,
 			valueKeyPath: \PersonWrapper.person,
-			uniqueKeyPath: \Person.id)
+			uniqueKeyPath: \Person.id,
+			performUpdate: true)
 
 		XCTAssertEqual(updated.count, 2)
 		XCTAssertTrue(updated.contains(wrappedPersons[2]))
