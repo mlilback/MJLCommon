@@ -5,6 +5,7 @@
 //
 
 import Foundation
+import CommonCrypto
 
 public extension Data {
 	/// Initializes Data with the contents of inputStream, read synchronously
@@ -21,7 +22,17 @@ public extension Data {
 		}
 		inputStream.close()
 	}
-
+	
+	/// Calculates a SHA256 checksum
+	/// - Returns: the checksum
+	func sha256() -> Data {
+		var hash = [UInt8](repeating: 0,  count: Int(CC_SHA256_DIGEST_LENGTH))
+		self.withUnsafeBytes {
+			_ = CC_SHA256($0.baseAddress, CC_LONG(self.count), &hash)
+		}
+		return Data(hash)
+	}
+	
 	/// Enumerate through slices of contents divided by a particular data value
 	///
 	/// - Parameters:
