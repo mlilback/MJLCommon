@@ -7,49 +7,82 @@
 import Foundation
 import Security
 
-private let SecClass: String! = kSecClass as String
-private let SecAttrService: String! = kSecAttrService as String
-private let SecAttrGeneric: String! = kSecAttrGeneric as String
-private let SecAttrAccount: String! = kSecAttrAccount as String
-private let SecValueData: String! = kSecValueData as String
+private let SecClass: String = kSecClass as String
+private let SecValueData: String = kSecValueData as String
 
-open class Keychain {
+/// simple access to the keychain. All items are stored/retrieved as kSecClassGenericPassword
+public class Keychain {
 	let service: String
-
-	public init(service: String = "io.rc2.client") {
+	let secClass: String
+	
+	/// Creates a Keychain object
+	/// - Parameter service: The name the item will be stored under. This should generally be your bundle identifier
+	public init(service: String, secClass: CFString = kSecClassGenericPassword) {
+		guard secClass == kSecClassInternetPassword || secClass == kSecClassGenericPassword
+		else { fatalError("unsupported secClass") }
 		self.service = service
+		self.secClass = secClass as String
 	}
-
-	open func getString(_ key: String) -> String? {
+	
+	/// Gets data from the keychain
+	/// - Parameter key: the key the data was stored under
+	/// - Returns: the value as a Data object. Returns nil if not found or there is an error
+	public func getData(key: String) -> Data? {
 		let query = setupQuery(key)
 		var dataRef: AnyObject?
 		let status = withUnsafeMutablePointer(to: &dataRef) { SecItemCopyMatching(query as CFDictionary, UnsafeMutablePointer($0)) }
-		if status == noErr && dataRef != nil {
-			return NSString(data: (dataRef as? Data)!, encoding: String.Encoding.utf8.rawValue) as String?
-		}
-		return nil
+		guard status == noErr && dataRef != nil else { return nil }
+		return dataRef as? Data
 	}
-
-	@discardableResult open func removeKey(_ key: String) -> Bool {
+	
+	/// Gets string from the keychain
+	/// - Parameter key: the key the data was stored under
+	/// - Returns: the value as a String. Returns nil if not found or there is an error
+	public func getString(key: String) -> String? {
+		guard let data = getData(key: key) else { return nil }
+		return String(data: data, encoding: .utf8)
+	}
+	
+	/// Removes any
+	/// - Parameter key: The key the item is stored under
+	/// - Returns: true/false depending if successful
+	/// - Throws: NSError of domain NSOSStatusErrorDomain if any Kechain API call results in an error
+	@discardableResult public func removeKey(key: String) throws -> Bool {
 		let query = setupQuery(key)
-		return noErr == SecItemDelete(query as CFDictionary)
+		let status = SecItemDelete(query as CFDictionary)
+		if status == noErr { return true }
+		throw NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)
 	}
-
-	open func setString(_ key: String, value: String?) throws {
-		guard value != nil else {
-			removeKey(key)
+	
+	/// Sets a value in the keychain
+	/// - Parameters:
+	///   - key: the key to store the data under
+	///   - value: the string to store
+	/// - Throws: NSError of domain NSOSStatusErrorDomain if any Kechain API call results in an error
+	public func setString(key: String, value: String?) throws {
+		try setData(key: key, value: value?.data(using: .utf8))
+	}
+	
+	/// Sets a value in the keychain
+	/// - Parameters:
+	///   - key: the key to store the data under
+	///   - value: the data to store
+	/// - Throws: NSError of domain NSOSStatusErrorDomain if any Kechain API call results in an error
+	public func setData(key: String, value: Data?) throws {
+		guard let valueToStore = value else {
+			try removeKey(key: key)
 			return
 		}
 		var query = setupQuery(key)
 		var status: OSStatus = noErr
-		if let existing = getString(key) {
+		if let existing = getData(key: key) {
 			guard existing != value else {
 				return
 			}
-			let values: [String:AnyObject] = [SecValueData: (value?.data(using: String.Encoding.utf8))! as AnyObject]
+			let values: [String:AnyObject] = [SecValueData: value as AnyObject]
 			status = SecItemUpdate(query as CFDictionary, values as CFDictionary)
 		} else {
-			query[SecValueData] = value!.data(using: String.Encoding.utf8) as AnyObject?
+			query[SecValueData] =  valueToStore as AnyObject?
 			status = SecItemAdd(query as CFDictionary, nil)
 		}
 		if status != errSecSuccess {
@@ -57,8 +90,8 @@ open class Keychain {
 		}
 	}
 
-	fileprivate func setupQuery(_ key: String) -> [String:AnyObject] {
-		var query: [String: AnyObject] = [SecClass: kSecClassGenericPassword as String as String as AnyObject]
+	private func setupQuery(_ key: String) -> [String:AnyObject] {
+		var query: [String: AnyObject] = [SecClass: secClass as AnyObject]
 		query[kSecAttrService as String] = service as AnyObject?
 		query[kSecAttrAccount as String] = key as AnyObject?
 		query[kSecReturnData as String] = kCFBooleanTrue
