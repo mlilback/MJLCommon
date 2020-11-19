@@ -18,6 +18,7 @@ public extension String {
 	/// - parameter nsRange: the NSRange to convert
 	///
 	/// - returns: the matching string range
+	@available(*, deprecated, message: "use Range(nsrange: in:)")
 	func range(from nsRange: NSRange) -> Range<String.Index>? {
 		guard
 			let from16 = utf16.index(utf16.startIndex, offsetBy: nsRange.location, limitedBy: utf16.endIndex),
