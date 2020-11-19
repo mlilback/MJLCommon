@@ -35,7 +35,7 @@ public extension String {
 	///
 	/// - returns: the substring, or nil if the range is invalid
 	func substring(from: NSRange) -> String? {
-		guard let range = range(from: from) else { return nil }
+		guard let range = Range<String.Index>(from, in: self) else { return nil }
 		return String(self[range])
 	}
 
